@@ -1,11 +1,10 @@
-server:
-  port: 9000
-
 spring:
-  application:
-    name: api-gateway
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
       routes:
         - id: user-service
           uri: lb://user-service
@@ -19,18 +18,7 @@ spring:
           uri: lb://comms-service
           predicates:
             - Path=/api/v1/communications/**
-      default-filters:
-        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
-      globalcors:
-        corsConfigurations:
-          "[/**]":
-            allowedOrigins: "${FRONTEND_URL:http://localhost:3000}"
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
-              - PATCH
-              - DELETE
-              - OPTIONS
-            allowedHeaders: "*"
-            allowCredentials: true
+
+  kubernetes:
+    discovery:
+      all-namespaces: true
