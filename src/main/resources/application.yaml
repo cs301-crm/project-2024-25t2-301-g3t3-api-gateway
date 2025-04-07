@@ -8,15 +8,15 @@ spring:
     gateway:
       routes:
         - id: user-service
-          uri: lb://user-service
+          uri: ${USER_SERVICE_URL:http://user-service.default.svc.minikube.local}
           predicates:
             - Path=/api/v1/users/**,/api/v1/auth/**
         - id: client-service
-          uri: lb://client-service
+          uri: ${CLIENT_SERVICE_URL:http://client-service.default.svc.minikube.local}
           predicates:
             - Path=/api/v1/clients/**
         - id: comms-service
-          uri: lb://comms-service
+          uri: ${COMMS_SERVICE_URL:http://comms-service.default.svc.minikube.local}
           predicates:
             - Path=/api/v1/communications/**
       default-filters:
