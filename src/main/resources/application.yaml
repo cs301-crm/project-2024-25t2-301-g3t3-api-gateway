@@ -14,7 +14,7 @@ spring:
         - id: client-service
           uri: ${CLIENT_SERVICE_URL:http://client-service.default.svc.minikube.local}
           predicates:
-            - Path=/api/v1/clients/**
+            - Path=/api/v1/clients/**,/api/v1/accounts/**,/api/v1/client-logs/**,/api/v1/transactions/**
         - id: comms-service
           uri: ${COMMS_SERVICE_URL:http://comms-service.default.svc.minikube.local}
           predicates:
